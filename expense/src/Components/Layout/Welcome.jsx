@@ -1,8 +1,19 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import AuthContext from '../Store/AuthContext'
 import './Welcome.css'
 
 const Welcome = () => {
+  const ctx=useContext(AuthContext)
+  const location=useNavigate()
+
+  const logoutHandler=()=>{
+  ctx.logout()
+  location('/')
+  }
+
+
   return (
     <div className='header'>
       <div>
@@ -12,7 +23,9 @@ const Welcome = () => {
         Your profile is incomplete : 
        
         <Link to='/profile'>Complete Now</Link>
-        
+      </div>
+      <div >
+        <button className='button' onClick={logoutHandler}>Logout</button>
       </div>
     </div>
   )
