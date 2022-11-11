@@ -1,11 +1,17 @@
 import React, { useState, useRef } from "react";
+import { useContext } from "react";
+import AuthContext from "../Store/AuthContext";
 import classes from './AuthForm.module.css'
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [isLodding,setIsLoading]=useState(false)
   const emailRef = useRef();
   const passwordRef = useRef();
+  const history=useNavigate()
+ 
+  const authCtx=useContext(AuthContext) 
 
   const submitHandler=(event)=>{
     event.preventDefault()
@@ -46,7 +52,9 @@ const AuthForm = () => {
         })
       }
     }).then((data)=>{
-      console.log(data.idToken)
+      authCtx.login(data.idToken)
+      history('/Welcome')
+      
     }).catch((error)=>{
       alert(error.message)
     })
