@@ -3,6 +3,7 @@ import { useContext } from "react";
 import AuthContext from "../Store/AuthContext";
 import classes from './AuthForm.module.css'
 import { useNavigate } from "react-router-dom";
+import Logo from '../Assets/Logo.png'
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -62,6 +63,13 @@ const AuthForm = () => {
   
 
   return (
+    <>
+    <div className="header">
+      <div style={{display:'flex'}}>
+        <img className="img" src={Logo} alt='logoimg'/>
+        <div style={{margin:'10px'}}>Expense Tracker</div>
+      </div>
+    </div>
     <section className={classes.auth}>
       <h1>{isLogin ? "Login" : "SignUp"}</h1>
       <form onSubmit={submitHandler}>
@@ -91,6 +99,7 @@ const AuthForm = () => {
       </div>
       </div>
     </section>
+    </>
   );
 };
 
