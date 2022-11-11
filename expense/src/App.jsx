@@ -6,6 +6,7 @@ import AuthContext from './Components/Store/AuthContext'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from './Components/Profile/Profile'
 import Verification from './Components/Auth/Verification'
+import ResetPassword from './Components/Auth/ResetPassword'
 
 const App = () => {
  const loginCtx=useContext(AuthContext)
@@ -18,7 +19,7 @@ const App = () => {
       <Route path="/" element={<AuthForm/>} /> 
       {loggedIn && <Route path="/Verification" element={<Verification/>} />}
       {loggedIn && <Route path="/Profile" element={<Profile/>} />}
-      
+      <Route path="/Reset" element={<ResetPassword/>} /> 
       </Routes>
       </BrowserRouter>
   )

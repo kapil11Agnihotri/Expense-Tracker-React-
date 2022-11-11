@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useContext } from "react";
 import AuthContext from "../Store/AuthContext";
 import classes from './AuthForm.module.css'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from '../Assets/Logo.png'
 
 const AuthForm = () => {
@@ -86,7 +86,6 @@ const AuthForm = () => {
           {isLodding && <h3>Sending Request....</h3>}
         </div>
       </form>
-      <div>
       <div className={classes.actions}>
       <button
             onClick={() => {
@@ -94,10 +93,15 @@ const AuthForm = () => {
             }}
             className={classes.toggle}
           >
-            {isLogin ? "Create new account" : "Login with existing account"}
+            {isLogin ? "New User? Create new account" : "Existing User? Login with existing account"}
           </button>
       </div>
+      <div className={classes.actions}>
+        <Link to='/Reset'>
+          <button className={classes.toggle}>Forgot Password ?</button>
+        </Link>
       </div>
+      
     </section>
     </>
   );
