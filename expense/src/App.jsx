@@ -5,6 +5,7 @@ import Welcome from './Components/Layout/Welcome'
 import AuthContext from './Components/Store/AuthContext'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from './Components/Profile/Profile'
+import Verification from './Components/Auth/Verification'
 
 const App = () => {
  const loginCtx=useContext(AuthContext)
@@ -15,6 +16,7 @@ const App = () => {
     <Routes>
       { loggedIn && <Route path="/Welcome" element={<Welcome/>} />}
       <Route path="/" element={<AuthForm/>} /> 
+      {loggedIn && <Route path="/Verification" element={<Verification/>} />}
       {loggedIn && <Route path="/Profile" element={<Profile/>} />}
       
       </Routes>

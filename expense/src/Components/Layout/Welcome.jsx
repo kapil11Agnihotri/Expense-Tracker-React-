@@ -11,7 +11,7 @@ const Welcome = () => {
       <div>
         Your profile is incomplete : 
        
-        <Link to='/Profile'>Complete Now</Link>
+        <Link to='/profile'>Complete Now</Link>
         
       </div>
     </div>

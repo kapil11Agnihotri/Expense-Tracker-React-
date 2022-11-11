@@ -1,0 +1,19 @@
+.verify{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    
+      
+}
+.verify button{
+    background: rgb(59, 61, 214);
+    color: white;
+    border-radius: 20%;
+    height: 40px;
+    width: 100px;
+    
+   
+   
+   
+}

@@ -54,7 +54,7 @@ const AuthForm = () => {
       }
     }).then((data)=>{
       authCtx.login(data.idToken)
-      history('/Welcome')
+      history('/Verification')
       
     }).catch((error)=>{
       alert(error.message)
