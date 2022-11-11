@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../Store/AuthContext";
@@ -38,6 +38,18 @@ const Profile = () => {
         alert('Failed')
     })
   };
+  
+  fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCm5L7G1RQwkRNv8SpcRkiunQDVORXBR48',{
+     method:'POST',
+     body:JSON.stringify({
+        idToken:AuthCtx.token,
+     }),
+     headers:{
+        "Content-Type": "application/json",
+     }
+  }).then((res)=>{
+    console.log(res)
+  })
 
   return (
     <>
