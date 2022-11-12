@@ -1,10 +1,10 @@
-import React, { useContext, useRef } from "react";
+import React, { useCallback, useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthContext";
 import "./Welcome.css";
 import classes from "../Profile/Profile.module.css";
-import { useState } from "react";
 import ExpenseList from "./ExpenseList";
+import axios from "axios";
 
 const Welcome = () => {
   const ctx = useContext(AuthContext);
@@ -14,8 +14,9 @@ const Welcome = () => {
   const categoryRef = useRef();
   const [expense, setExpense] = useState([]);
 
-  const addExpenseHandler = (event) => {
+  const addExpenseHandler = async (event) => {
     event.preventDefault();
+    
     const obj = {
       enteredAmount: amountRef.current.value,
       enteredDescription: descriptionRef.current.value,
@@ -23,11 +24,36 @@ const Welcome = () => {
     };
     console.log(obj);
     //const object=[...expense,obj]
-    setExpense((prev)=>{
-      return [...prev,obj]
+    setExpense((prev) => {
+      return [...prev, obj];
     });
+    const resp = await axios.post(
+      "https://expense-tracker-4e84e-default-rtdb.firebaseio.com/Expences.json",
+      obj
+    );
+    console.log(resp)
   };
+  
+  const fetchExpense=useCallback(async()=>{
+    const responce=await axios.get("https://expense-tracker-4e84e-default-rtdb.firebaseio.com/Expences.json")
+    const data = await responce.data
+   
+    const loadedExpence=[]
 
+      for(const key in data){
+        loadedExpence.push({
+          id:key,
+          enteredAmount:data[key].enteredAmount,
+          enteredDescription:data[key].enteredDescription,
+          enteredCategory:data[key].enteredCategory
+        })
+        
+      }
+      
+      setExpense(loadedExpence);
+  },[])
+  
+  
   const showExpenses = expense.map((item) => {
     return (
       <ExpenseList
@@ -38,6 +64,7 @@ const Welcome = () => {
       />
     );
   });
+  fetchExpense()
 
   const logoutHandler = () => {
     ctx.logout();
