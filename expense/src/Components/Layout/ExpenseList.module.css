@@ -1,14 +1,26 @@
 .expense{
     margin: 1rem;
-    padding: 1rem;
     background-color: #4332da;
     box-shadow: 0 2px 8px rgba(26, 16, 141, 0.317);
-    border-radius: 12px;
+    border-radius: 15px;
     text-align: center;
     color: white;
     display: flex;
-    width: 40%;
+    width: 50%;
+    position: relative;
+    left: 350px;
   }
   .expense h3{
     margin: 25px;
   }
+  .expense button{
+    cursor: pointer;
+    font: inherit;
+    color: white;
+    background-color: #acdae4;
+    border: 1px solid #9f5ccc;
+    border-radius: 10px;
+    width: 120px;
+    height:40px;
+    margin: 20px;
+}
