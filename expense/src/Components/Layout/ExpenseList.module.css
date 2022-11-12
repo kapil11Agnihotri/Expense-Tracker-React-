@@ -1,0 +1,14 @@
+.expense{
+    margin: 1rem;
+    padding: 1rem;
+    background-color: #4332da;
+    box-shadow: 0 2px 8px rgba(26, 16, 141, 0.317);
+    border-radius: 12px;
+    text-align: center;
+    color: white;
+    display: flex;
+    width: 40%;
+  }
+  .expense h3{
+    margin: 25px;
+  }
