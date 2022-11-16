@@ -1,18 +1,22 @@
 import axios from "axios";
 import React from "react";
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthContext";
+import { authActions } from "../Store/AuthReducer";
 import classes from "./Verification.module.css";
 
 const Verification = () => {
-  const ctx = useContext(AuthContext);
+  //const ctx = useContext(AuthContext);
   const location = useNavigate();
+  const token=useSelector(state=>state.auth.token)
+ 
 
   const submitHandler = async () => {
     const obj = {
       requestType: "VERIFY_EMAIL",
-      idToken: ctx.token,
+      idToken:token,
     };
 
     const resp = await axios.post(

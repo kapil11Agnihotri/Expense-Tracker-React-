@@ -1,17 +1,22 @@
-import React, { useContext, useRef } from "react";
+import React, {  useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
+//import AuthContext from "../Store/AuthContext";
 import "./Welcome.css";
 import classes from "../Profile/Profile.module.css";
 import ExpenseList from "./ExpenseList";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../Store/AuthReducer";
+import { expenseActions } from "../Store/ExpenceReducer";
 
 
 const Welcome = () => {
-  const ctx = useContext(AuthContext);
+  //const ctx = useContext(AuthContext);
   const location = useNavigate();
   const amountRef = useRef();
   const descriptionRef = useRef();
   const categoryRef = useRef();
+  const dispatch=useDispatch()
+  const expense=useSelector(state=>state.expense.expenses)
  
 const submitHandler=(event)=>{
   event.preventDefault()
@@ -20,14 +25,15 @@ const submitHandler=(event)=>{
     enteredDescription: descriptionRef.current.value,
     enteredCategory: categoryRef.current.value,
   };
-  ctx.addExpense(obj)
+  dispatch(expenseActions.addExpense(obj))
+
 }
-console.log('rendered')
-  const showExpenses = ctx.expense.map((item) => {
+
+  const showExpenses = expense.map((item,index) => {
     return (
       <ExpenseList
         key={Math.random()}
-        id={item.id}
+        id={index}
         amount={item.enteredAmount}
         description={item.enteredDescription}
         category={item.enteredCategory}
@@ -36,7 +42,8 @@ console.log('rendered')
   });
 
   const logoutHandler = () => {
-    ctx.logout();
+   // ctx.logout()
+   dispatch(authActions.logout())
     location("/");
   };
 
@@ -77,7 +84,7 @@ console.log('rendered')
             </select>
           </div>
           <div className={classes.actions}>
-            <button>Add Expense</button>
+            <button >Add Expense</button>
           </div>
         </form>
       </section>

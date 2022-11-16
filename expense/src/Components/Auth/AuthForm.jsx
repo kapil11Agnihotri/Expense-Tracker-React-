@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
-import { useContext } from "react";
-import AuthContext from "../Store/AuthContext";
+//import { useContext } from "react";
+//import AuthContext from "../Store/AuthContext";
 import classes from './AuthForm.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import Logo from '../Assets/Logo.png'
+import { useDispatch } from "react-redux";
+import { authActions } from "../Store/AuthReducer";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -11,12 +13,13 @@ const AuthForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const history=useNavigate()
+  const dispatch=useDispatch();
  
-  const authCtx=useContext(AuthContext) 
+  //const authCtx=useContext(AuthContext) 
 
   const submitHandler=(event)=>{
     event.preventDefault()
-
+    
     const enteredEmail=emailRef.current.value
     const enteredPassword=passwordRef.current.value
     setIsLoading(true)
@@ -53,7 +56,8 @@ const AuthForm = () => {
         })
       }
     }).then((data)=>{
-      authCtx.login(data.idToken)
+     // authCtx.login(data.idToken)
+     dispatch(authActions.login(data.idToken))
       history('/Verification')
       
     }).catch((error)=>{
