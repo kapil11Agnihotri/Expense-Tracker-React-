@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react";
-//import { useContext } from "react";
-//import AuthContext from "../Store/AuthContext";
 import classes from './AuthForm.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import Logo from '../Assets/Logo.png'
@@ -14,8 +12,7 @@ const AuthForm = () => {
   const passwordRef = useRef();
   const history=useNavigate()
   const dispatch=useDispatch();
- 
-  //const authCtx=useContext(AuthContext) 
+
 
   const submitHandler=(event)=>{
     event.preventDefault()
@@ -56,7 +53,6 @@ const AuthForm = () => {
         })
       }
     }).then((data)=>{
-     // authCtx.login(data.idToken)
      dispatch(authActions.login(data.idToken))
       history('/Verification')
       

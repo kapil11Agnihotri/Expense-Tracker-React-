@@ -1,15 +1,25 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { themeActions } from '../Store/themeSlice'
+import classes from './Footer.module.css'
 
 const Footer = () => {
+  const dispatch=useDispatch()
+
+  const toggleTheme=()=>{
+    dispatch(themeActions.togglefun())
+  }
+   
   return (
-    <footer>
+  
+    <div className={classes.actions}>
         <button>
-          toggle theme 
+            Activate Premium 
+        </button> 
+        <button onClick={toggleTheme} style={{margin:'1rem'}}>
+          Change Theme
         </button>
-        <button>
-            Dounload all your Expenses
-        </button>
-    </footer>
+    </div>
   )
 }
 

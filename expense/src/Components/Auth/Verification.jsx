@@ -1,10 +1,10 @@
 import axios from "axios";
 import React from "react";
-import { useContext } from "react";
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
-import { authActions } from "../Store/AuthReducer";
+
+
 import classes from "./Verification.module.css";
 
 const Verification = () => {

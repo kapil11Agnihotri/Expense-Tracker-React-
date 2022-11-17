@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { useContext } from "react";
+import React, {  useRef } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../Store/AuthContext";
 import classes from "./Profile.module.css";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const nameInputRef = useRef();
   const urlInputRef = useRef();
 
-  const AuthCtx = useContext(AuthContext);
+ 
+  const token=useSelector(state=>state.auth.token)
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -18,7 +18,7 @@ const Profile = () => {
     const enteredUrl = urlInputRef.current.value;
 
     const obj = {
-      idToken: AuthCtx.token,
+      idToken: token,
       displayName: enteredName,
       photoUrl: enteredUrl,
       returnSecureToken: true,
@@ -33,7 +33,7 @@ const Profile = () => {
 
   const getDetail = async () => {
     const obj = {
-      idToken: AuthCtx.token,
+      idToken:token,
     };
     const res = await axios.post(
       "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyCm5L7G1RQwkRNv8SpcRkiunQDVORXBR48",
